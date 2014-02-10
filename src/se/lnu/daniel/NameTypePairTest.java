@@ -38,8 +38,25 @@ public class NameTypePairTest {
 		sut = new NameTypePair("inputStream", "InputStream");
 		assertTrue(sut.isMatching());
 		
+		sut = new NameTypePair("files", "File[]");
+		assertTrue(sut.isMatching());
+		
+		sut = new NameTypePair("files[]", "File");
+		assertTrue(sut.isMatching());
+		
 		sut = new NameTypePair("stream", "InputStream");
 		assertFalse(sut.isMatching());
+	}
+	
+	@Test
+	public void testFirstLetterAbbriviations() {
+		NameTypePair sut;
+		sut = new NameTypePair("fw", "FileWriter");
+		assertTrue(sut.nameIsAbbriviationOfType());
+		
+		sut = new NameTypePair("fp", "FileWriter");
+		assertFalse(sut.nameIsAbbriviationOfType());
+		
 	}
 
 	@Test
@@ -77,8 +94,18 @@ public class NameTypePairTest {
 		sut = new NameTypePair("str", "InputStream");
 		assertTrue(sut.nameIsShortForType());
 		
+		sut = new NameTypePair("fileManager", "StandardJavaFileManager");
+		assertTrue(sut.nameIsShortForType());
+		
+		sut = new NameTypePair("diagnostics", "DiagnosticCollector<JavaFileObject>");
+		assertTrue(sut.nameIsShortForType());
+		
 		sut = new NameTypePair("ins", "InputStream");
 		assertFalse(sut.nameIsShortForType());
+		
+		sut = new NameTypePair("f", "File");
+		assertFalse(sut.nameIsShortForType());
+		
 	}
 
 }

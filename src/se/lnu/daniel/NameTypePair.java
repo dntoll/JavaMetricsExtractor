@@ -54,4 +54,16 @@ public class NameTypePair {
 		}
 		return false;
 	}
+
+
+	public boolean nameIsAbbriviationOfType() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+	public boolean hasHungarianNotationForType() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }
