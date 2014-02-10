@@ -105,7 +105,52 @@ public class NameTypePairTest {
 		
 		sut = new NameTypePair("f", "File");
 		assertFalse(sut.nameIsShortForType());
-		
 	}
-
+	
+	@Test
+	public void testHasHungarianNotationForType() {
+		NameTypePair sut;
+		sut = new NameTypePair("nTimes", "int");
+		assertTrue(sut.hasHungarianNotationForType());
+		
+		sut = new NameTypePair("times", "int");
+		assertFalse(sut.hasHungarianNotationForType());
+	}
+	
+	@Test
+	public void testHasMemberNotation() {
+		NameTypePair sut;
+		sut = new NameTypePair("myTimes", "int", Type.Member);
+		assertTrue(sut.hasClassMemberNotation());
+		
+		sut = new NameTypePair("m_Times", "int", Type.Member);
+		assertTrue(sut.hasClassMemberNotation());
+		
+		sut = new NameTypePair("_times", "int", Type.Member);
+		assertTrue(sut.hasClassMemberNotation());
+		
+		sut = new NameTypePair("times", "int", Type.Member);
+		assertFalse(sut.hasClassMemberNotation());
+		
+		http://www.cs.umd.edu/~clin/MoreJava/Intro/var-descr.html
+	}
+	
+	@Test
+	public void testShowsPluralis() {
+		NameTypePair sut;
+		sut = new NameTypePair("myTimes", "int[]", Type.Any);
+		assertTrue(sut.isNameIsShowingTypePluralis());
+		
+		sut = new NameTypePair("myTimeBuffer", "int[]", Type.Any);
+		assertTrue(sut.isNameIsShowingTypePluralis());
+		
+		sut = new NameTypePair("myTimeArray", "int[]", Type.Any);
+		assertTrue(sut.isNameIsShowingTypePluralis());
+		
+		sut = new NameTypePair("myTimeArray", "int", Type.Any);
+		assertFalse(sut.isNameIsShowingTypePluralis());
+		
+		sut = new NameTypePair("myTime", "int[]", Type.Any);
+		assertFalse(sut.isShowingTypePluralis());
+	}
 }
