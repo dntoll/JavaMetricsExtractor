@@ -5,7 +5,6 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.net.URI;
 import java.util.ArrayList;
-import java.util.Formatter;
 import java.util.List;
 import java.util.Locale;
 
@@ -101,8 +100,7 @@ public class SyntaxChecker {
 		        compiler.getTask(null, fileManager, diagnostics, null, null, compilationUnits).call();
 
 		        List<String> messages = new ArrayList<String>();
-		        Formatter formatter = new Formatter();
-		        for (Diagnostic diagnostic : diagnostics.getDiagnostics()) {
+		        for (Diagnostic<?> diagnostic : diagnostics.getDiagnostics()) {
 		        	if (diagnostic.getMessage(Locale.ROOT).contains("does not exist")) {
 		        		
 		        	} else if (diagnostic.getMessage(Locale.ROOT).contains("cannot find symbol")) {
