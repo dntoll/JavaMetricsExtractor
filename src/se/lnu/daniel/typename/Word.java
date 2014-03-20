@@ -1,7 +1,5 @@
 package se.lnu.daniel.typename;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedHashSet;
 
 public class Word  implements Comparable<Word> {

@@ -466,10 +466,8 @@ public class NameTypePairTest {
 		assertEquals("content", remains[1]);
 		assertEquals("pane", remains[2]);
 		
-		DocumentBuilderFactory	dbFactory	[db]	[factory]
-
-		
-		
-
+		sut = new NameTypePair("dbFactory", "DocumentBuilderFactory", Origin.Any);
+		remains = sut.getRemainsAfterRemovingType();
+		assertEquals(0, remains.length);
 	}
 }

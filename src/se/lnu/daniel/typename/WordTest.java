@@ -49,15 +49,11 @@ public class WordTest {
 		assertTrue(actual.length == 2);
 		assertEquals("case", actual[1].toString());	
 		
-		
-		
 		actual = Word.createFromIdentifier(new Identifier("b64"));
 		assertTrue(actual.length == 2);
 		assertEquals("b", actual[0].toString());
 		assertEquals("64", actual[1].toString());
-		
-		
-		
+				
 		actual = Word.createFromIdentifier(new Identifier("LEFT_AXIOM"));
 		assertEquals(3, actual.length);
 		assertEquals("left", actual[0].toString());

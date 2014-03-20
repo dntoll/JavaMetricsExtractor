@@ -1,5 +1,9 @@
 package se.lnu.daniel.typename;
 
+
+/**
+ * Result of a matching between two words.
+ */
 public class Match  {
 	Word nameWord;
 	boolean matchInOneTypeWord, isAcronym, abbriviationIsEntireName;

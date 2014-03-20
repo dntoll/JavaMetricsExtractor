@@ -9,7 +9,7 @@ public class CSVSaver {
 	
 	char delimiter = ';';
 	private File result;
-	CSVSaver(File result) {
+	public CSVSaver(File result) {
 		this.result = result;
 	}
 	
@@ -32,19 +32,7 @@ public class CSVSaver {
 		fw.write("FileName" + delimiter + 
 		 "scope" + delimiter +
 		 "Type" + delimiter + 
-		 "Name" + delimiter +
-		 "nameWOType" + delimiter +
-		 "matchedType" + delimiter +
-		 "equalsIgnorePluralis" + delimiter + 
-		 "isMatchingOneWordOfType" + delimiter + 
-		 "nameIsShortForType" + delimiter + 
-		 "nameIsFirstLetterAbbriviationOfType" + delimiter + 
-		 "nameIndicateNumber" + delimiter +
-		 "nameIsPluralis" + delimiter +
-		 "nameIndicatesCollection" + delimiter +
-		 "typeCanBeCollection" + delimiter +
-		 "typeIsArray" + delimiter + 
-		 "\n");
+		 "Name" + delimiter + "\n");
 	}
 	
 	
@@ -66,35 +54,11 @@ public class CSVSaver {
 			fw.write(String.format("%s" + delimiter + 
 					   "%s" + delimiter +
 					   "%s" + delimiter + 
-					   "%s" + delimiter +
-					   "%s" + delimiter +
-					   "%s" + delimiter +
-					   "%b" + delimiter +
-					   "%b" + delimiter +
-					   "%b" + delimiter +
-					   "%b" + delimiter +
-					   "%b" + delimiter +
-					   "%b" + delimiter +
-					   "%b" + delimiter +
-					   "%b" + delimiter +
-					   "%b" + delimiter +
-					   "\n", 
+					   "%s" + "\n", 
 					   pair.getSourceFile().getName(),
 					   pair.getScope(),
 					   pair.getType(), 
-					   pair.getName(),
-					   nameWithoutType,
-					   typeMatched,
-					   pair.equalsIgnorePluralis(),
-					   pair.isMatchingOneWordOfType(),
-					   pair.nameIsShortForType(),
-					   pair.nameIsFirstLetterAbbriviationOfType(),
-					   pair.nameIndicatesNumberType(),
-					   pair.nameIsPluralis(),
-					   pair.nameIndicatesCollection(),
-					   pair.typeCanBeCollection(),
-					   pair.typeIsArray()
-					   ));
+					   pair.getName()));
 		}
 	}
 
