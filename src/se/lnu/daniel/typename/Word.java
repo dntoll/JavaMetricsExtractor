@@ -60,9 +60,16 @@ public class Word  implements Comparable<Word> {
 			}
 		}
 		
-		ret.add(identifier.fullName);
 		
-		return ret.toArray(new Word[ret.size()]);
+		ret.add(identifier.fullName);
+		LinkedHashSet<Word> noBlanks = new LinkedHashSet<Word>(); 
+		for (Word r : ret) {
+			if (r.text.equals("") == false) {
+				noBlanks.add(r);
+			}
+		}
+		
+		return noBlanks.toArray(new Word[noBlanks.size()]);
 	}
 	
 	public String toString() {

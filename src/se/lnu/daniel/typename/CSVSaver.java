@@ -1,9 +1,14 @@
 package se.lnu.daniel.typename;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+
+import se.lnu.daniel.typename.NameTypePair.Origin;
 
 public class CSVSaver {
 	
@@ -28,6 +33,52 @@ public class CSVSaver {
 		}
 	}
 	
+	public void saveExtra(List<NameTypePair> declarations) {
+		try {
+			result.createNewFile();
+		
+			FileWriter fw = new FileWriter(result);
+			
+			writeExtraHeader(fw, delimiter);
+			writeExtraPairs(fw, delimiter, declarations);
+			fw.close();
+		
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public List<NameTypePair> load() throws IOException {
+		List<NameTypePair> ret = new ArrayList<NameTypePair>();
+		
+		
+		BufferedReader br = new BufferedReader(new FileReader(result));
+		
+		br.readLine(); //skip header
+		
+		String line;
+		while((line = br.readLine()) != null) {
+			String[] parts = line.split(";");
+			String filename = parts[0];
+			String scope = parts[1];
+			String type = parts[2];
+			String name = parts[3];
+			
+			NameTypePair.Origin origin = Origin.valueOf(scope);
+			
+			ret.add(new NameTypePair(	new VariableName(name), 
+								new Type(type), 
+								origin, 
+								new File(filename)));
+								
+		}
+		
+		return ret;
+		
+		
+		
+	}
+	
 	private static void writeHeader(FileWriter fw, char delimiter)	throws IOException {
 		fw.write("FileName" + delimiter + 
 		 "scope" + delimiter +
@@ -35,32 +86,66 @@ public class CSVSaver {
 		 "Name" + delimiter + "\n");
 	}
 	
+	private static void writeExtraHeader(FileWriter fw, char delimiter)	throws IOException {
+		fw.write("FileName" + delimiter + 
+		 "scope" + delimiter +
+		 "Type" + delimiter + 
+		 "Name" + delimiter +
+		 "Match" + delimiter +"\n");
+	}
+	
 	
 	
 	private static void writePairs(FileWriter fw, char delimiter, List<NameTypePair> nameTypesInFile) throws IOException {
 		for (NameTypePair pair : nameTypesInFile) {
-			String nameWithoutType = "";
-			String typeMatched = "";
-			
-			Word[] names = pair.getRemainsAfterRemovingType();
-			for (Word name : names) {
-				nameWithoutType += "[" +name.toString() + "]";
-			}
-			Match[] matches = pair.getMatchedWords();
-			for (Match name : matches) {
-				typeMatched += "[" +name + "]";
-			}
-			
 			fw.write(String.format("%s" + delimiter + 
 					   "%s" + delimiter +
 					   "%s" + delimiter + 
 					   "%s" + "\n", 
 					   pair.getSourceFile().getName(),
-					   pair.getScope(),
+					   pair.getScope().toString(),
 					   pair.getType(), 
 					   pair.getName()));
 		}
 	}
+
+	public void writeExtraPairs(FileWriter fw, char delimiter, List<NameTypePair> nameTypesInFile) throws IOException {
+		for (NameTypePair pair : nameTypesInFile) {
+			//String nameWithoutType = "";
+			//String typeMatched = "";
+			
+			ContainAnalysis analysis = new ContainAnalysis(pair.getName(), pair.getType());
+			
+			/*Word[] names = analysis.getRemainsAfterRemovingType();
+			for (Word name : names) {
+				nameWithoutType += "[" +name.toString() + "]";
+			}
+			Match[] matches = analysis.getMatchedWords();
+			for (Match name : matches) {
+				typeMatched += "[" +name + "]";
+			}*/
+			String match = "not matched";
+			if (analysis.isFullyMatched()) {
+				match = "fully matched";
+			} else if (analysis.isPartlyMatched()) {
+				match = "partly matched";
+			}
+				
+			
+			fw.write(String.format("%s" + delimiter + 
+					   "%s" + delimiter +
+					   "%s" + delimiter + 
+					   "%s" + delimiter + "%s" + "\n", 
+					   pair.getSourceFile().getName(),
+					   pair.getScope().toString(),
+					   pair.getType(), 
+					   pair.getName(),
+					   match
+					  ));
+		}
+	}
+
+	
 
 
 }

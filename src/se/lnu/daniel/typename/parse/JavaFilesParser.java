@@ -37,7 +37,7 @@ public class JavaFilesParser {
 		
 		jfp.parseFolder(folder);
 		
-		File result = new File("extractedVariables.csv");
+		File result = new File("data/extractedVariables.csv");
 		CSVSaver saver= new CSVSaver(result);
 		
 		saver.save(jfp.declarations);

@@ -53,6 +53,9 @@ public class MethodVisitor extends VoidVisitorAdapter<Object>
         for (VariableDeclarator vars: myVars){
         	declarations.add(new NameTypePair(	new VariableName(vars.getId().toString()), 
         										new Type(n.getType().toString()), Origin.Local, currentFile));
+        	
+        	
+        	
         }
         super.visit(n, arg);
 	}
