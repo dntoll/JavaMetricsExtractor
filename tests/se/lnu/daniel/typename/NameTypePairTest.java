@@ -60,9 +60,6 @@ public class NameTypePairTest {
 		
 		sut = new NameTypePair("_access", "Access", Origin.Any);
 		assertTrue(sut.equalsIgnorePluralis());
-		
-		sut = new NameTypePair("ActiveEvent", "active_event", Origin.Any);
-		assertTrue(sut.equalsIgnorePluralis());
 	}
 	
 	

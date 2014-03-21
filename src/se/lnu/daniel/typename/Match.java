@@ -5,19 +5,23 @@ package se.lnu.daniel.typename;
  * Result of a matching between two words.
  */
 public class Match  {
-	
+	enum NameMatch {
+		unmatched,
+		partlyMatched,
+		fullyMatched
+	}
 	
 	private WordSplit nameParts;
-	private boolean[] matchedNameParts;
+	private NameMatch[] matchedNameParts;
 
 
 
 	public Match(WordSplit nameSplit) {
 		nameParts = nameSplit;
-		matchedNameParts = new boolean[nameParts.parts.length];
+		matchedNameParts = new NameMatch[nameParts.parts.length];
 		
 		for (int i = 0; i< matchedNameParts.length; i++)
-			matchedNameParts[i] = false;
+			matchedNameParts[i] = NameMatch.unmatched;
 	}
 
 	
@@ -47,9 +51,19 @@ public class Match  {
 	public void addMatch(Word namePart, Word typePart) {
 		
 		for (int i = 0; i< nameParts.parts.length; i++) {
-			if (matchedNameParts[i] == false) {
+			if (matchedNameParts[i] == NameMatch.unmatched) {
 				if (nameParts.parts[i] == namePart) {
-					matchedNameParts[i] = true;
+					matchedNameParts[i] = NameMatch.fullyMatched;
+				}
+			}
+		}
+	}
+	
+	public void addPartlyMatch(Word nameWord, Word typeWord) {
+		for (int i = 0; i< nameParts.parts.length; i++) {
+			if (matchedNameParts[i] == NameMatch.unmatched) {
+				if (nameParts.parts[i] == nameWord) {
+					matchedNameParts[i] = NameMatch.partlyMatched;
 				}
 			}
 		}
@@ -58,10 +72,17 @@ public class Match  {
 
 
 	public boolean isFullMatch() {
-		for (int i = 0; i< matchedNameParts.length; i++)
-			if (matchedNameParts[i] == false) {
-				return false;
+		for (int i = 0; i< matchedNameParts.length; i++) {
+			if (matchedNameParts[i] != NameMatch.fullyMatched) {
+				try {
+					Integer.parseInt(nameParts.parts[i].text );
+					
+				} catch (NumberFormatException e) {
+					return false;
+				}
+				
 			}
+		}
 		
 		return true;
 	}
@@ -70,10 +91,14 @@ public class Match  {
 
 	public boolean isPartMatch() {
 		for (int i = 0; i< matchedNameParts.length; i++)
-			if (matchedNameParts[i] == true) {
+			if (matchedNameParts[i] != NameMatch.unmatched) {
 				return true;
 			}
 		
 		return false;
 	}
+
+
+
+	
 }

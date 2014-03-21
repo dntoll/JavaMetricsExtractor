@@ -6,9 +6,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class FirstLetterAbbriviationStrategyTest {
+public class FirstLetterAbbriviationStrategyTest extends AbstractMatchingStrategyTest {
 
-	private FirstLetterAbbriviationStrategy sut;
+	protected AbstractMatchingStrategy sut;
 
 	@Before
 	public void setUp() throws Exception {
@@ -31,13 +31,6 @@ public class FirstLetterAbbriviationStrategyTest {
 		assertFalse(actual.isFullMatch());
 	}
 
-	public Match match(FirstLetterAbbriviationStrategy sut, String[] inputName,
-			String[] inputType) {
-		WordSplit nameSplit = new WordSplit(inputName);
-		
-		WordSplit typeSplit =  new WordSplit(inputType);
-		Match actual = sut.match(nameSplit, typeSplit);
-		return actual;
-	}
+	
 
 }

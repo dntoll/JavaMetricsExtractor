@@ -1,6 +1,8 @@
 package se.lnu.daniel.typename;
 
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
+import java.util.List;
 
 public class Identifier {
 
@@ -27,24 +29,27 @@ public class Identifier {
 		WordSplit fullWord = new WordSplit(new String[] {fullName.text});
 		
 		String camelNotationWords[] = fullName.original.split(splitCamelIntoWords);
-		String underscoreWords[] = fullName.text.split("_");
-		underscoreWords = removeEmpty(underscoreWords);
-		
-		String numberWords[] = fullName.text.split("(?<=\\d)(?=\\D)|(?=\\d)(?<=\\D)");
 		
 		
-		This should be done recursively somehow...
-		if (camelNotationWords.length > 1) {
-			WordSplit camelSplit = new WordSplit(camelNotationWords);
-			return new WordSplit[] { fullWord, camelSplit };
-		} 
-		if (underscoreWords.length > 1) {
-			WordSplit underScoreSplit= new WordSplit(underscoreWords);
-			return new WordSplit[] { fullWord, underScoreSplit };
+		
+		
+		List<String> wordList = new ArrayList<String>();
+		
+		for(String cword : camelNotationWords) {
+			String underscoreWords[] = cword.split("_");
+			underscoreWords = removeEmpty(underscoreWords);
+			for(String uword : underscoreWords) {
+				String numberWords[] = uword.split("(?<=\\d)(?=\\D)|(?=\\d)(?<=\\D)");
+				for(String nword : numberWords) {
+					wordList.add(nword);
+				}
+			}
+		}
+		if (wordList.size() > 1) {
+			return new WordSplit[] { fullWord, new WordSplit(wordList.toArray(new String[wordList.size() ]) )};	
 		}
 			
-			
-		}
+		
 		
 		return new WordSplit[] { fullWord };
 	}
@@ -52,6 +57,7 @@ public class Identifier {
 	private String[] removeEmpty(String[] underscoreWords) {
 		int num = 0; 
 		for (String word : underscoreWords) {
+			
 			if (word.equals("") == false) {
 				num++;
 			}

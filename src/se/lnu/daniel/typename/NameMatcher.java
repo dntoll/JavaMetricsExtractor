@@ -40,6 +40,7 @@ public class NameMatcher {
 		
 		strategies.add( new FullWordStrategy());
 		strategies.add( new FirstLetterAbbriviationStrategy());
+		strategies.add( new AbbrivitationStrategy());
 		
 		for (NameTypePair ntp : declarations) {
 			VariableName name = ntp.getName();

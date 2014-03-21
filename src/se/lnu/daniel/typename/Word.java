@@ -16,6 +16,8 @@ public class Word  implements Comparable<Word> {
 		text = text.replace(",", "");
 		if (text.startsWith("_"))
 			text = text.substring(1);
+		if (text.endsWith("_"))
+			text = text.substring(0, text.length()-1);
 		
 	}
 

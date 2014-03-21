@@ -28,44 +28,34 @@ public class IdentifierTest {
 
 	@Test
 	public void shouldSplitCamelCaseGetSplits() {
-		String expectedFull = "one_two";
-		String expectedPart1 = "one";
-		String expectedPart2 = "two";
 		
-		assertTwoParts(expectedFull, expectedPart1, expectedPart2);
+		assertTwoParts("oneTwo", "onetwo", "one", "two");
 	}
 	
 	@Test
 	public void shouldSplitOnUnderscore() {
-		String expectedFull = "one_two";
-		String expectedPart1 = "one";
-		String expectedPart2 = "two";
-		
-		assertTwoParts(expectedFull, expectedPart1, expectedPart2);
+		assertTwoParts("one_two", "one_two", "one", "two");
+		assertTwoParts("ONE_TWO", "one_two", "one", "two");
 	}
 	
 	@Test
 	public void shouldSplitOnNumber() {
-		String expectedFull = "_b64_";
-		String expectedPart1 = "b";
-		String expectedPart2 = "64";
-		
-		assertTwoParts(expectedFull, expectedPart1, expectedPart2);
+		assertTwoParts("_b64_", "b64", "b", "64");
 	}
 
 
-	public void assertTwoParts(String expectedFull,
+	public void assertTwoParts(String input, String expectedFull,
 			String expectedPart1, String expectedPart2) {
 		
-		Identifier sut = new Identifier(expectedFull);
+		Identifier sut = new Identifier(input);
 		WordSplit[] actual = sut.getSplits();
 		
 		assertNotNull(actual);
 		assertEquals(2, actual.length);
-		assertEquals(expectedFull, actual[0].parts[0].text);
 		
 		assertEquals(expectedPart1, actual[1].parts[0].text);
 		assertEquals(expectedPart2, actual[1].parts[1].text);
+		assertEquals(expectedFull, actual[0].parts[0].text);
 	}
 	
 	

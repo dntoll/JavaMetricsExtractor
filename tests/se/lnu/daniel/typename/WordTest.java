@@ -67,29 +67,6 @@ public class WordTest {
 		
 	}
 
-	@Test
-	public void testToString() {
-		fail("Not yet implemented");
-	}
 
-	@Test
-	public void testContainsIgnoreCase() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testEqualsString() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testEqualsIgnorePluralis() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testContainsIgnorePluralis() {
-		fail("Not yet implemented");
-	}
 
 }
