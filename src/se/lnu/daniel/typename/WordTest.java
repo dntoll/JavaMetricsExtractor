@@ -31,47 +31,41 @@ public class WordTest {
 	public void testCreateFromIdentifier() {
 		Word[] actual;
 		
-		actual = Word.createFromIdentifier(new Identifier("UPPER_CASE"));
-		assertTrue(actual.length == 3);
+		actual = Identifier.createFromIdentifier(new Identifier("UPPER_CASE"));
+		assertEquals(2, actual.length);
 		assertEquals("upper", actual[0].toString());
-		assertEquals("_", actual[1].toString());
-		assertEquals("case", actual[2].toString());
+		assertEquals("case", actual[1].toString());
 		
-		actual = Word.createFromIdentifier(new Identifier("_Fields"));
-		assertTrue(actual.length == 2);
-		assertEquals("_", actual[0].toString());
-		assertEquals("fields", actual[1].toString());
+		actual = Identifier.createFromIdentifier(new Identifier("_Fields"));
+		assertTrue(actual.length == 1);
+		assertEquals("fields", actual[0].toString());
 		
-		actual = Word.createFromIdentifier(new Identifier("CamelCase"));
+		actual = Identifier.createFromIdentifier(new Identifier("CamelCase"));
 		assertTrue(actual.length == 2);
 		assertEquals("case", actual[1].toString());
-		actual = Word.createFromIdentifier(new Identifier("camelCase"));
+		actual = Identifier.createFromIdentifier(new Identifier("camelCase"));
 		assertTrue(actual.length == 2);
 		assertEquals("case", actual[1].toString());	
 		
-		actual = Word.createFromIdentifier(new Identifier("b64"));
+		actual = Identifier.createFromIdentifier(new Identifier("b64"));
 		assertTrue(actual.length == 2);
 		assertEquals("b", actual[0].toString());
 		assertEquals("64", actual[1].toString());
 				
-		actual = Word.createFromIdentifier(new Identifier("LEFT_AXIOM"));
-		assertEquals(3, actual.length);
+		actual = Identifier.createFromIdentifier(new Identifier("LEFT_AXIOM"));
+		assertEquals(2, actual.length);
 		assertEquals("left", actual[0].toString());
-		assertEquals("_", actual[1].toString());
-		assertEquals("axiom", actual[2].toString());
+		assertEquals("axiom", actual[1].toString());
 		
-		actual = Word.createFromIdentifier(new Identifier("left_axiom"));
-		assertEquals(3, actual.length);
+		actual = Identifier.createFromIdentifier(new Identifier("left_axiom"));
+		assertEquals(2, actual.length);
 		assertEquals("left", actual[0].toString());
-		assertEquals("_", actual[1].toString());
-		assertEquals("axiom", actual[2].toString());
+		assertEquals("axiom", actual[1].toString());
 		
-		actual = Word.createFromIdentifier(new Identifier("_b64_"));
-		assertTrue(actual.length == 4);
-		assertEquals("_", actual[0].toString());
-		assertEquals("b", actual[1].toString());
-		assertEquals("64", actual[2].toString());
-		assertEquals("_", actual[3].toString());
+		actual = Identifier.createFromIdentifier(new Identifier("_b64_"));
+		assertEquals(2, actual.length);
+		assertEquals("b", actual[0].toString());
+		assertEquals("64", actual[1].toString());
 		
 	}
 

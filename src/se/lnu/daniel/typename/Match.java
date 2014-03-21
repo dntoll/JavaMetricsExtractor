@@ -5,29 +5,23 @@ package se.lnu.daniel.typename;
  * Result of a matching between two words.
  */
 public class Match  {
-	Word nameWord;
-	boolean matchInOneTypeWord, isAcronym, abbriviationIsEntireName;
 	
-	public Match(Word nameWord, boolean matchInOneTypeWord, boolean isAcronym,
-			boolean abbriviationIsEntireName) {
-		this.nameWord = nameWord;
-		this.matchInOneTypeWord = matchInOneTypeWord;
-		this.isAcronym = isAcronym;
-		this.abbriviationIsEntireName = abbriviationIsEntireName;
+	
+	public Match() {
+		
 	}
 
-	public String toString() {
+	
+
+	public boolean isBetter(Match bestMatch) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+
+	public void addMatch(Word namePart, Word typePart) {
 		
-		String typeOfMatch = "";
-		/*
-		 if (matchInOneTypeWord) {
-			typeOfMatch += "(inT)";
-		} else if (abbriviationIsEntireName) {
-			typeOfMatch += "(abb)";
-		} else if (isAcronym) {
-			typeOfMatch += "(acr)";
-		} */
 		
-		return nameWord + typeOfMatch;
 	}
 }

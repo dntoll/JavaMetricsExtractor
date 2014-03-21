@@ -31,7 +31,6 @@ public class ContainAnalysis {
 	
 	private void match() {
 		
-		
 		diff_match_patch dmp = new diff_match_patch();
 		for(Word nameWord : name.getWords()) {
 			
@@ -72,6 +71,7 @@ public class ContainAnalysis {
 					(abbriviationIsEntireName && !abbriviationHasVokalInMiddle)) {
 				matched.add(new Match(nameWord, matchInOneTypeWord, isAccronym, abbriviationIsEntireName));
 			} else {
+				
 				if (nameWord.toString().equalsIgnoreCase("_") == false)
 					remains.add(nameWord);
 			}

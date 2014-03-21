@@ -1,12 +1,8 @@
 package se.lnu.daniel.typename;
 
-import java.util.LinkedHashSet;
-
 public class Word  implements Comparable<Word> {
-
-	static final String splitCamelIntoWords = "(?<!(^|[A-Z]))(?=[A-Z])|(?<!^)(?=[A-Z][a-z])";
-	private String text;
-	private String original;
+	String text;
+	String original;
 	
 	
 	public Word(String word) {
@@ -21,56 +17,7 @@ public class Word  implements Comparable<Word> {
 		
 	}
 
-	public static Word[] createFromIdentifier(Identifier identifier) {
-		
-		
-		String camelNotationWords[] = identifier.fullName.original.split(splitCamelIntoWords);
-		//String underscoreWords[] = identifier.fullName.original.split("_");
-		
-		
-		String words[] = camelNotationWords;
-		
-		LinkedHashSet<Word> ret = new LinkedHashSet<Word>(); 
-		
-		for(String stringToSplit : words) {
-			//Strings...
-			String[] tokens = stringToSplit .split("(?<=\\d)(?=\\D)|(?=\\d)(?<=\\D)");
-			
-			for (String word : tokens) {
-			
-			
-				if (word.equals("_")) {
-					ret.add(new Word("_"));
-				} else if (word.startsWith("_")) {
-					ret.add(new Word("_"));
-					ret.add(new Word(word.replace("_", "")));
-				} else if (word.endsWith("_")) {
-					ret.add(new Word(word.replace("_", "")));
-					ret.add(new Word("_"));
-				} else if (word.contains("_")) {
-					String underscoreWords[] = word.split("_");
-					for(int i = 0; i <  underscoreWords.length; i++) {
-						ret.add(new Word(underscoreWords[i]));
-						if (i+1 < underscoreWords.length)
-							ret.add(new Word("_"));
-					}
-				} else {
-					ret.add(new Word(word));
-				}
-			}
-		}
-		
-		
-		ret.add(identifier.fullName);
-		LinkedHashSet<Word> noBlanks = new LinkedHashSet<Word>(); 
-		for (Word r : ret) {
-			if (r.text.equals("") == false) {
-				noBlanks.add(r);
-			}
-		}
-		
-		return noBlanks.toArray(new Word[noBlanks.size()]);
-	}
+	
 	
 	public String toString() {
 		return text;
