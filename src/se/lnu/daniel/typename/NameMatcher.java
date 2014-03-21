@@ -36,7 +36,10 @@ public class NameMatcher {
 
 	List<NameTypeMatch> getBestMatches() {
 		List<NameTypeMatch> ret = new ArrayList<NameTypeMatch>();
+		List<AbstractMatchingStrategy> strategies = new ArrayList<AbstractMatchingStrategy>();
 		
+		strategies.add( new FullWordStrategy());
+		strategies.add( new FirstLetterAbbriviationStrategy());
 		
 		for (NameTypePair ntp : declarations) {
 			VariableName name = ntp.getName();
@@ -47,12 +50,12 @@ public class NameMatcher {
 			
 			for(WordSplit nameSplit : nameSplits) {
 				for(WordSplit typeSplit : typeSplits) {
-					MatchingStrategy ms = new MatchingStrategy();
-					
-					Match ntm = ms.matchFullName(nameSplit, typeSplit);
-					
-					if (ntm.isBetter(bestMatch)) {
-						bestMatch = ntm;
+					for(AbstractMatchingStrategy strategy : strategies) {
+						Match ntm = strategy.match(nameSplit, typeSplit);
+						
+						if (ntm.isBetter(bestMatch)) {
+							bestMatch = ntm;
+						}
 					}
 				}
 			}

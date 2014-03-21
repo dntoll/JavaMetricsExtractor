@@ -24,14 +24,50 @@ public class Identifier {
 	final static String splitCamelIntoWords = "(?<!(^|[A-Z]))(?=[A-Z])|(?<!^)(?=[A-Z][a-z])";
 	
 	WordSplit[] getSplits() {
-		WordSplit[] ret = new WordSplit[1];
+		WordSplit fullWord = new WordSplit(new String[] {fullName.text});
+		
 		String camelNotationWords[] = fullName.original.split(splitCamelIntoWords);
-		ret[0] = new WordSplit(camelNotationWords);
+		String underscoreWords[] = fullName.text.split("_");
+		underscoreWords = removeEmpty(underscoreWords);
+		
+		String numberWords[] = fullName.text.split("(?<=\\d)(?=\\D)|(?=\\d)(?<=\\D)");
 		
 		
-		return ret;
+		This should be done recursively somehow...
+		if (camelNotationWords.length > 1) {
+			WordSplit camelSplit = new WordSplit(camelNotationWords);
+			return new WordSplit[] { fullWord, camelSplit };
+		} 
+		if (underscoreWords.length > 1) {
+			WordSplit underScoreSplit= new WordSplit(underscoreWords);
+			return new WordSplit[] { fullWord, underScoreSplit };
+		}
+			
+			
+		}
+		
+		return new WordSplit[] { fullWord };
 	}
 	
+	private String[] removeEmpty(String[] underscoreWords) {
+		int num = 0; 
+		for (String word : underscoreWords) {
+			if (word.equals("") == false) {
+				num++;
+			}
+		}
+		String[] ret = new String[num];
+		int index = 0;
+		for (String word : underscoreWords) {
+			if (word.equals("") == false) {
+				ret[index] = word;
+				index++;
+			}
+		}
+		return ret;
+		
+	}
+
 	static Word[] createFromIdentifier(Identifier identifier) {
 		
 		

@@ -14,6 +14,8 @@ public class Word  implements Comparable<Word> {
 		text = text.replace("<", "");
 		text = text.replace(">", "");
 		text = text.replace(",", "");
+		if (text.startsWith("_"))
+			text = text.substring(1);
 		
 	}
 
@@ -104,7 +106,7 @@ public class Word  implements Comparable<Word> {
 			return false;
 		
 		byte[] textBytes = text.getBytes();
-		String vowels = "aeiouyåäö";
+		String vowels = "aeiouyï¿½ï¿½ï¿½";
 		byte[] vowelBytes = vowels.getBytes();
 		for (int i = 1; i< text.length(); i++) {
 			for (int v = 1; v < vowels.length(); v++) {

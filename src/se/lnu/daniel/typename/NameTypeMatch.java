@@ -2,19 +2,20 @@ package se.lnu.daniel.typename;
 
 public class NameTypeMatch {
 
-	public NameTypeMatch(NameTypePair ntp) {
-		// TODO Auto-generated constructor stub
+	private Match bestMatch;
+
+	public NameTypeMatch(NameTypePair ntp, Match bestMatch) {
+		this.bestMatch = bestMatch;
+		
 	}
 
 	
 	public boolean isFullMatch() {
-		// TODO Auto-generated method stub
-		return null;
+		return bestMatch.isFullMatch();
 	}
 
-	public boolean doesNotMatch() {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean isPartMatch() {
+		return bestMatch.isPartMatch();
 	}
 
 }

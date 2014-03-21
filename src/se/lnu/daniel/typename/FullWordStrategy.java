@@ -1,10 +1,11 @@
 package se.lnu.daniel.typename;
 
-public class MatchingStrategy {
+public class FullWordStrategy extends AbstractMatchingStrategy {
 
-	public Match matchFullName(WordSplit nameSplit, WordSplit typeSplit) {
+	@Override
+	public Match match(WordSplit nameSplit, WordSplit typeSplit) {
 		
-		Match ret = new Match()
+		Match ret = new Match(nameSplit);
 		
 		for (Word namePart :nameSplit.parts ) {
 			for (Word typePart :typeSplit.parts ) {
@@ -13,7 +14,7 @@ public class MatchingStrategy {
 				}
 			}
 		}
-		return null;
+		return ret;
 	}
-
+	 
 }
