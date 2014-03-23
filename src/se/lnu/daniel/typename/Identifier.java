@@ -22,6 +22,7 @@ public class Identifier {
 		fullName = new Word(fromCode);
 		//words = createFromIdentifier(this);
 	}
+	//http://stackoverflow.com/questions/7593969/regex-to-split-camelcase-or-titlecase-advanced
 	
 	final static String splitCamelIntoWords = "(?<!(^|[A-Z]))(?=[A-Z])|(?<!^)(?=[A-Z][a-z])";
 	

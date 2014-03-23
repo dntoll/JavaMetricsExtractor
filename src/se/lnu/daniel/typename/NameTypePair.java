@@ -43,7 +43,6 @@ public class NameTypePair {
 	
 
 
-	//http://stackoverflow.com/questions/7593969/regex-to-split-camelcase-or-titlecase-advanced
 	
 
 	
