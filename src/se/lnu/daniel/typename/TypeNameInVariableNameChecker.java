@@ -13,10 +13,10 @@ public class TypeNameInVariableNameChecker {
 		int partlyMatched = 0;
 		int unmatched = 0;
 		
-		void match(ContainAnalysis ca) {
-			if (ca.isFullyMatched()) {
+		void match(NameTypeMatch match) {
+			if (match.isFullMatch()) {
 				fullyMatched++;
-			} else if (ca.isPartlyMatched()) {
+			} else if (match.isPartMatch()) {
 				partlyMatched++;
 			} else {
 				unmatched++;
@@ -54,7 +54,7 @@ public class TypeNameInVariableNameChecker {
 		
 		
 		System.out.println("saving analysis to file...");
-		File result = new File("data/typeNamesAnalysed.csv");
+		File result = new File("data/typeNamesAnalysed2.csv");
 		CSVSaver saver= new CSVSaver(result);
 		saver.saveExtra(declarations);
 		
@@ -62,21 +62,28 @@ public class TypeNameInVariableNameChecker {
 		System.out.println("starting analysis...");
 		int progress = 0;
 		int parsedPercent = 0;
-		for (NameTypePair ntp : declarations) {
-			ContainAnalysis ca = new ContainAnalysis(ntp.getName(), ntp.getType());
-
+		
+		
+		
+		NameMatcher nm = new NameMatcher(declarations);
+		
+		List<NameTypeMatch> matches = nm.getBestMatches();
+		
+		for (NameTypeMatch match : matches) {
+			//ContainAnalysis ca = new ContainAnalysis(ntp.getName(), ntp.getType());
+			NameTypePair ntp = match.getPair();
 			
 			if (ntp.getType().isPrimitive() == false) {
-				nonPrimitive.match(ca);
+				nonPrimitive.match(match);
 				if (ntp.getScope() == NameTypePair.Origin.Parameter) {
-					parameters.match(ca);
+					parameters.match(match);
 				} else if (ntp.getScope() == NameTypePair.Origin.Field) {
-					fields.match(ca);
+					fields.match(match);
 				} else {
-					locals.match(ca);
+					locals.match(match);
 				}
 			} else {
-				primitive.match(ca);
+				primitive.match(match);
 			}
 			
 			

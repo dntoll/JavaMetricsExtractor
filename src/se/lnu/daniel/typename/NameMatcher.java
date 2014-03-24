@@ -32,6 +32,17 @@ public class NameMatcher {
 		NameMatcher nm = new NameMatcher(declarations);
 		
 		List<NameTypeMatch> matches = nm.getBestMatches();
+		
+		for (NameTypeMatch match : matches) {
+			NameTypePair pair = match.getPair();
+			if (match.isFullMatch()) {
+				
+			} else if (match.isPartMatch()) {
+				
+			} else {
+				
+			}
+		}
 	}
 
 	List<NameTypeMatch> getBestMatches() {

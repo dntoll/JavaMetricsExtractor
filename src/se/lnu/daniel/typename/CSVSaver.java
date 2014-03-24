@@ -110,25 +110,19 @@ public class CSVSaver {
 	}
 
 	public void writeExtraPairs(FileWriter fw, char delimiter, List<NameTypePair> nameTypesInFile) throws IOException {
-		for (NameTypePair pair : nameTypesInFile) {
-			//String nameWithoutType = "";
-			//String typeMatched = "";
+		
+		NameMatcher nm = new NameMatcher(nameTypesInFile);
+		
+		List<NameTypeMatch> matches = nm.getBestMatches();
+		
+		for (NameTypeMatch match : matches) {
+			NameTypePair pair = match.getPair();
 			
-			ContainAnalysis analysis = new ContainAnalysis(pair.getName(), pair.getType());
-			
-			/*Word[] names = analysis.getRemainsAfterRemovingType();
-			for (Word name : names) {
-				nameWithoutType += "[" +name.toString() + "]";
-			}
-			Match[] matches = analysis.getMatchedWords();
-			for (Match name : matches) {
-				typeMatched += "[" +name + "]";
-			}*/
-			String match = "not matched";
-			if (analysis.isFullyMatched()) {
-				match = "fully matched";
-			} else if (analysis.isPartlyMatched()) {
-				match = "partly matched";
+			String matchString = "not matched";
+			if (match.isFullMatch()) {
+				matchString = "fully matched";
+			} else if (match.isPartMatch()) {
+				matchString = "partly matched";
 			}
 				
 			
@@ -140,7 +134,7 @@ public class CSVSaver {
 					   pair.getScope().toString(),
 					   pair.getType(), 
 					   pair.getName(),
-					   match
+					   matchString
 					  ));
 		}
 	}

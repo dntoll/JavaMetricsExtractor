@@ -8,8 +8,9 @@ public class FirstLetterAbbriviationStrategy extends AbstractMatchingStrategy {
 		Match ret = new Match(nameSplit);
 		
 		String firstLetterAbbriviation = "";
-		for (Word typePart :typeSplit.parts ) {
-			firstLetterAbbriviation += typePart.text.charAt(0);
+		for (Word typePart : typeSplit.parts ) {
+			if (typePart.text.length() > 0)
+				firstLetterAbbriviation += typePart.text.charAt(0);
 		}
 		
 		for (Word namePart :nameSplit.parts ) {
