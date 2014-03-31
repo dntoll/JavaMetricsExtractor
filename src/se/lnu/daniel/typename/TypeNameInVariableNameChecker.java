@@ -37,7 +37,7 @@ public class TypeNameInVariableNameChecker {
 	}
 	
 	public TypeNameInVariableNameChecker() throws IOException {
-		String file = "wordpress-3.8.1";
+		String file = "wordpress-3.8.1"; 
 		System.out.println("reading file...");
 		CSVSaver loader = new CSVSaver(new File("data/"+file+".csv"));
 		
