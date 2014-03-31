@@ -5,7 +5,8 @@ import java.io.File;
 public class NameTypePair {
 	public enum Origin {
 		Any,
-		Field, Parameter, Local
+		Field, Parameter, Local, //Java
+		property, parameter //PHP
 	}
 	private VariableName name;
 	private Type type;

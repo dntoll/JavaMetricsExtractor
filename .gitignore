@@ -2,6 +2,7 @@
 /bin/*
 
 #output
+/data/*
 .csv
 .classpath
 .project

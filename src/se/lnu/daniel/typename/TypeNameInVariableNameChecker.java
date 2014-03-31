@@ -37,9 +37,9 @@ public class TypeNameInVariableNameChecker {
 	}
 	
 	public TypeNameInVariableNameChecker() throws IOException {
-		
+		String file = "wordpress-3.8.1";
 		System.out.println("reading file...");
-		CSVSaver loader = new CSVSaver(new File("data/extractedVariables.csv"));
+		CSVSaver loader = new CSVSaver(new File("data/"+file+".csv"));
 		
 		Map<String, Object> files = new HashMap<String, Object>();
 		
@@ -54,7 +54,7 @@ public class TypeNameInVariableNameChecker {
 		
 		
 		System.out.println("saving analysis to file...");
-		File result = new File("data/typeNamesAnalysed2.csv");
+		File result = new File("data/"+file+"Analysed.csv");
 		CSVSaver saver= new CSVSaver(result);
 		saver.saveExtra(declarations);
 		

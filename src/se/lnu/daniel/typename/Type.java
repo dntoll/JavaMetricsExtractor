@@ -23,10 +23,18 @@ public class Type extends Identifier {
 			"LongAccumulator", 
 			"LongAdder"
 			};
-	
+	//split into PHP / Java primitives
 	//
 	final String[] primitives = {
 			"char", "boolean", "string", "object"
+	};
+	
+	final String[] phpPrimitives = {
+		"string",
+		"boolean",
+		"NULL",
+		"array", 
+		"integer"
 	};
 	
 	final String[] mostcommonjavatypes = {
