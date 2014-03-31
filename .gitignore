@@ -7,6 +7,7 @@
 .classpath
 .project
 .txt
+.xlsx
 
 *.class
 
